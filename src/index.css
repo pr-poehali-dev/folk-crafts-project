@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,8 +15,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 25 75% 47%;
+    --primary-foreground: 60 9.1% 97.8%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -22,8 +24,8 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 212 35% 42%;
+    --accent-foreground: 60 9.1% 97.8%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -97,5 +99,57 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Open Sans", sans-serif;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Cormorant", serif;
+  }
+}
+
+.ornament-border {
+  position: relative;
+}
+
+.ornament-border::before,
+.ornament-border::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--primary)) 10%,
+    hsl(var(--accent)) 30%,
+    hsl(var(--primary)) 50%,
+    hsl(var(--accent)) 70%,
+    hsl(var(--primary)) 90%,
+    transparent 100%
+  );
+  background-size: 40px 4px;
+}
+
+.ornament-border::before {
+  top: 0;
+}
+
+.ornament-border::after {
+  bottom: 0;
+}
+
+.hover-lift {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
