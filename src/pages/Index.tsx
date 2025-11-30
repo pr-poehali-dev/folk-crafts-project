@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
@@ -10,56 +11,64 @@ const sections = [
     title: 'Галерея',
     icon: 'Image',
     description: 'Яркие моменты проведения художественно-развивающих программ, процесс работы и законченные предметы народных ремесел учеников',
-    color: 'from-orange-100 to-amber-100'
+    color: 'from-orange-100 to-amber-100',
+    path: null
   },
   {
     id: 'history',
     title: 'История',
     icon: 'BookOpen',
     description: 'Исторические и фольклорные рассказы на темы мастер-классов',
-    color: 'from-blue-100 to-indigo-100'
+    color: 'from-blue-100 to-indigo-100',
+    path: null
   },
   {
     id: 'music',
     title: 'Музыка',
     icon: 'Music',
     description: 'Народные и авторские музыкальные произведения по темам программ',
-    color: 'from-purple-100 to-pink-100'
+    color: 'from-purple-100 to-pink-100',
+    path: null
   },
   {
     id: 'literature',
     title: 'Учебно-методическая литература',
     icon: 'Library',
     description: 'Методические материалы и пособия для педагогов',
-    color: 'from-green-100 to-emerald-100'
+    color: 'from-green-100 to-emerald-100',
+    path: null
   },
   {
     id: 'materials',
     title: 'Материалы по истории искусств',
     icon: 'Palette',
     description: 'Образовательные материалы по декоративно-прикладному искусству',
-    color: 'from-red-100 to-orange-100'
+    color: 'from-red-100 to-orange-100',
+    path: '/art-materials'
   },
   {
     id: 'museums',
     title: 'Музеи России',
     icon: 'Building2',
     description: 'Ссылки и информация о музеях народного искусства',
-    color: 'from-cyan-100 to-blue-100'
+    color: 'from-cyan-100 to-blue-100',
+    path: '/russian-museums'
   },
   {
     id: 'virtual',
     title: 'Виртуальные музеи',
     icon: 'MonitorPlay',
     description: 'Онлайн-экспозиции и виртуальные туры',
-    color: 'from-violet-100 to-purple-100'
+    color: 'from-violet-100 to-purple-100',
+    path: '/virtual-museums'
   },
   {
     id: 'tests',
     title: 'Проверка знаний и умений',
     icon: 'GraduationCap',
     description: 'Тесты 3 уровней для определения степени усвоения материалов медиатеки',
-    color: 'from-amber-100 to-yellow-100'
+    color: 'from-amber-100 to-yellow-100',
+    path: null
   }
 ];
 
@@ -83,6 +92,13 @@ const galleryImages = [
 
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null);
+  const navigate = useNavigate();
+
+  const handleSectionClick = (path: string | null) => {
+    if (path) {
+      navigate(path);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-blue-50">
@@ -152,8 +168,10 @@ export default function Index() {
                   <Button 
                     variant="outline" 
                     className="mt-4 border-primary text-primary hover:bg-primary hover:text-white transition-colors"
+                    onClick={() => handleSectionClick(section.path)}
+                    disabled={!section.path}
                   >
-                    Перейти
+                    {section.path ? 'Перейти' : 'Скоро'}
                     <Icon name="ArrowRight" size={16} className="ml-2" />
                   </Button>
                 </div>
